@@ -28,11 +28,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Hot dice are detected when all 6 dice are set aside as scoring
   4. Farkle is detected when no scoring dice exist in a roll
   5. Turn state machine correctly enforces the flow: roll, select scoring dice, bank-or-roll-again, with 800-point entry threshold
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] 01-01-PLAN.md — Initialize project (TypeScript + Vitest) and define shared types and constants
+- [ ] 01-02-PLAN.md — TDD scoring engine (singles, triples, N-of-a-kind, straight, three pairs, findScoringDice)
+- [ ] 01-03-PLAN.md — TDD turn state machine (roll, select, bank, farkle, hot dice, threshold)
 
 ### Phase 2: 3D Dice and Game Table
 **Goal**: Six 3D dice roll with satisfying physics on a game table with felt and wood textures, and dice face values are correctly read after settling
@@ -73,6 +74,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Scoring Engine | 0/? | Not started | - |
+| 1. Scoring Engine | 0/3 | Planning complete | - |
 | 2. 3D Dice and Game Table | 0/? | Not started | - |
 | 3. Playable Game | 0/? | Not started | - |
