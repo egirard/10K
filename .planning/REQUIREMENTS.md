@@ -14,7 +14,7 @@ Requirements for initial release. Validates the core differentiator: 3D dice on 
 - [ ] **SCORE-03**: Game correctly applies doubling for 4+of-a-kind (4x=double triple, 5x=double quad, 6x=double quint)
 - [ ] **SCORE-04**: Game correctly scores a straight (1-2-3-4-5-6) as 1000 points when rolled on all 6 dice
 - [ ] **SCORE-05**: Game correctly scores three pairs as 1000 points when rolled on all 6 dice
-- [ ] **SCORE-06**: Scoring combinations only count within a single throw (not accumulated across throws)
+- [x] **SCORE-06**: Scoring combinations only count within a single throw (not accumulated across throws)
 - [ ] **SCORE-07**: Game identifies all valid scoring dice in a roll and prevents selecting non-scoring dice
 
 ### Turn Mechanics
@@ -110,7 +110,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SCORE-03 | Phase 1 | Pending |
 | SCORE-04 | Phase 1 | Pending |
 | SCORE-05 | Phase 1 | Pending |
-| SCORE-06 | Phase 1 | Pending |
+| SCORE-06 | Phase 1 | Complete |
 | SCORE-07 | Phase 1 | Pending |
 | TURN-01 | Phase 1 | Pending |
 | TURN-02 | Phase 1 | Pending |
