@@ -38,10 +38,10 @@ created: 2026-03-19
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 01-01-01 | 01 | 1 | SCORE-01..07 | unit | `npx vitest run src/engine/__tests__/scoring.test.ts` | ❌ W0 | ⬜ pending |
-| 01-02-01 | 02 | 1 | TURN-01..07 | unit | `npx vitest run src/engine/__tests__/turn.test.ts` | ❌ W0 | ⬜ pending |
+| 01-01-01 | 01 | 1 | SCORE-01..07 | unit | `npx vitest run src/engine/scoring.test.ts` | No (W0) | pending |
+| 01-02-01 | 02 | 1 | TURN-01..07 | unit | `npx vitest run src/engine/turn.test.ts` | No (W0) | pending |
 
-*Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
+*Status: pending / green / red / flaky*
 
 ---
 
@@ -50,8 +50,8 @@ created: 2026-03-19
 - [ ] `package.json` — initialize project with TypeScript and Vitest
 - [ ] `tsconfig.json` — TypeScript configuration
 - [ ] `vitest.config.ts` — Vitest configuration
-- [ ] `src/engine/__tests__/scoring.test.ts` — test stubs for SCORE-01..07
-- [ ] `src/engine/__tests__/turn.test.ts` — test stubs for TURN-01..07
+- [ ] `src/engine/scoring.test.ts` — test stubs for SCORE-01..07
+- [ ] `src/engine/turn.test.ts` — test stubs for TURN-01..07
 
 *Wave 0 sets up the project and test infrastructure.*
 
