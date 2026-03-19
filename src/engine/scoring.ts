@@ -19,132 +19,119 @@ function buildFrequencyMap(dice: Roll): Map<DieValue, number> {
 }
 
 /**
- * Check if the roll is a straight (1-2-3-4-5-6 on all 6 dice).
- * Returns a ScoreBreakdown if it is, null otherwise.
+ * Check if the roll is a straight (1-2-3-4-5-6). Only valid with exactly 6 dice.
  */
-function checkStraight(
-  dice: Roll,
-  freq: Map<DieValue, number>,
-): ScoreBreakdown | null {
-  if (freq.size !== DICE_COUNT) return null;
+function checkStraight(dice: Roll, freq: Map<DieValue, number>): ScoreBreakdown | null {
+  if (freq.size !== 6) return null;
   for (const count of freq.values()) {
     if (count !== 1) return null;
   }
   return {
     total: STRAIGHT_SCORE,
-    components: [
-      {
-        dice: [1, 2, 3, 4, 5, 6],
-        points: STRAIGHT_SCORE,
-        description: 'Straight',
-      },
-    ],
-    scoringDiceIndices: dice.map((_, i) => i),
+    components: [{
+      dice: [1, 2, 3, 4, 5, 6] as DieValue[],
+      points: STRAIGHT_SCORE,
+      description: 'Straight',
+    }],
+    scoringDiceIndices: Array.from({ length: dice.length }, (_, i) => i),
   };
 }
 
 /**
- * Check if the roll is three pairs (exactly 3 distinct values, each appearing twice).
- * Returns a ScoreBreakdown if it is, null otherwise.
+ * Check if the roll is three pairs. Only valid with exactly 6 dice,
+ * exactly 3 distinct values, each appearing exactly twice.
  */
-function checkThreePairs(
-  dice: Roll,
-  freq: Map<DieValue, number>,
-): ScoreBreakdown | null {
+function checkThreePairs(dice: Roll, freq: Map<DieValue, number>): ScoreBreakdown | null {
   if (freq.size !== 3) return null;
   for (const count of freq.values()) {
     if (count !== 2) return null;
   }
-  const pairDice = Array.from(freq.entries()).flatMap(
-    ([v]) => [v, v] as DieValue[],
-  );
   return {
     total: THREE_PAIRS_SCORE,
-    components: [
-      {
-        dice: pairDice,
-        points: THREE_PAIRS_SCORE,
-        description: 'Three Pairs',
-      },
-    ],
-    scoringDiceIndices: dice.map((_, i) => i),
+    components: [{
+      dice: [...dice] as DieValue[],
+      points: THREE_PAIRS_SCORE,
+      description: 'Three Pairs',
+    }],
+    scoringDiceIndices: Array.from({ length: dice.length }, (_, i) => i),
   };
 }
 
 /**
- * Score dice by frequency: N-of-a-kind (3+) first, then singles (1s and 5s).
- * Dice consumed by higher combinations are not available for lower ones.
+ * Score dice by frequency: N-of-a-kind first, then singles.
+ * Tracks which original indices contribute to scoring.
  */
-function scoreByFrequency(
-  dice: Roll,
-  freq: Map<DieValue, number>,
-): ScoreBreakdown {
+function scoreByFrequency(dice: Roll, freq: Map<DieValue, number>): ScoreBreakdown {
   const components: ScoreComponent[] = [];
   const scoringDiceIndices: number[] = [];
   let total = 0;
 
-  // Track which indices have been consumed
-  const consumed = new Set<number>();
+  // Build index map: value -> list of original indices
+  const indexMap = new Map<DieValue, number[]>();
+  for (let i = 0; i < dice.length; i++) {
+    const val = dice[i];
+    if (!indexMap.has(val)) indexMap.set(val, []);
+    indexMap.get(val)!.push(i);
+  }
 
-  // Process N-of-a-kind (count >= 3) first
-  for (const [value, count] of freq.entries()) {
+  // Track remaining counts (so we don't double-count)
+  const remaining = new Map<DieValue, number>(freq);
+
+  // Process N-of-a-kind (3+) for each value
+  for (const [value, count] of freq) {
     if (count >= 3) {
-      const tripleBase = TRIPLE_SCORES[value];
-      const points = tripleBase * Math.pow(2, count - 3);
+      const points = TRIPLE_SCORES[value] * Math.pow(2, count - 3);
+      const diceArr = Array(count).fill(value) as DieValue[];
+      const indices = indexMap.get(value)!.slice(0, count);
+
+      let description: string;
+      if (count === 3) {
+        description = `Three ${value}s`;
+      } else if (count === 4) {
+        description = `Four ${value}s`;
+      } else if (count === 5) {
+        description = `Five ${value}s`;
+      } else {
+        description = `Six ${value}s`;
+      }
+
+      components.push({ dice: diceArr, points, description });
+      scoringDiceIndices.push(...indices);
       total += points;
+      remaining.set(value, 0); // All consumed by N-of-a-kind
+    }
+  }
 
-      // Collect dice values for this component
-      const componentDice: DieValue[] = Array(count).fill(value);
-      components.push({
-        dice: componentDice,
-        points,
-        description:
-          count === 3
-            ? `Three ${value}s`
-            : `${count}-of-a-kind ${value}s`,
-      });
+  // Process singles (1s and 5s only, with remaining count)
+  for (const [value, singlePoints] of Object.entries(SINGLE_SCORES)) {
+    const dieValue = Number(value) as DieValue;
+    const remainingCount = remaining.get(dieValue) || 0;
+    if (remainingCount > 0 && singlePoints !== undefined) {
+      const indices = indexMap.get(dieValue)!;
+      // Only take indices not already used by N-of-a-kind
+      const usedCount = (freq.get(dieValue) || 0) - remainingCount;
+      const availableIndices = indices.slice(usedCount, usedCount + remainingCount);
 
-      // Find and consume the indices for these dice
-      let found = 0;
-      for (let i = 0; i < dice.length && found < count; i++) {
-        if (!consumed.has(i) && dice[i] === value) {
-          consumed.add(i);
-          scoringDiceIndices.push(i);
-          found++;
-        }
+      for (let i = 0; i < remainingCount; i++) {
+        components.push({
+          dice: [dieValue],
+          points: singlePoints,
+          description: `Single ${dieValue}`,
+        });
+        scoringDiceIndices.push(availableIndices[i]);
+        total += singlePoints;
       }
     }
   }
 
-  // Process remaining singles (1s and 5s not consumed by triples)
-  for (let i = 0; i < dice.length; i++) {
-    if (consumed.has(i)) continue;
-    const value = dice[i];
-    const singleScore = SINGLE_SCORES[value];
-    if (singleScore !== undefined) {
-      total += singleScore;
-      consumed.add(i);
-      scoringDiceIndices.push(i);
-      components.push({
-        dice: [value],
-        points: singleScore,
-        description: `Single ${value}`,
-      });
-    }
-  }
+  scoringDiceIndices.sort((a, b) => a - b);
 
-  return {
-    total,
-    components,
-    scoringDiceIndices: scoringDiceIndices.sort((a, b) => a - b),
-  };
+  return { total, components, scoringDiceIndices };
 }
 
 /**
- * Score a roll of dice, returning the complete breakdown.
- *
- * Priority order: straight > three pairs > N-of-a-kind > singles.
- * Dice consumed by higher combinations are NOT available for lower ones.
+ * Score a roll of dice, returning the breakdown of scoring combinations.
+ * Priority: straight > three pairs > N-of-a-kind > singles.
  */
 export function scoreRoll(dice: Roll): ScoreBreakdown {
   if (dice.length === 0) {
@@ -153,22 +140,21 @@ export function scoreRoll(dice: Roll): ScoreBreakdown {
 
   const freq = buildFrequencyMap(dice);
 
-  // Check 6-dice combinations first (only valid with exactly 6 dice)
+  // Check 6-dice combinations first
   if (dice.length === DICE_COUNT) {
-    const straightResult = checkStraight(dice, freq);
-    if (straightResult) return straightResult;
+    const straight = checkStraight(dice, freq);
+    if (straight) return straight;
 
-    const threePairsResult = checkThreePairs(dice, freq);
-    if (threePairsResult) return threePairsResult;
+    const threePairs = checkThreePairs(dice, freq);
+    if (threePairs) return threePairs;
   }
 
-  // Extract N-of-a-kind (3+), then singles (1s and 5s)
   return scoreByFrequency(dice, freq);
 }
 
 /**
- * Find all dice indices that participate in scoring combinations.
- * Returns a sorted array of indices. Empty array means farkle.
+ * Find indices of all scoring dice in a roll.
+ * Returns sorted array of indices. Empty array means farkle.
  */
 export function findScoringDice(dice: Roll): number[] {
   const result = scoreRoll(dice);
@@ -176,9 +162,9 @@ export function findScoringDice(dice: Roll): number[] {
 }
 
 /**
- * Score a specific subset of dice the player chose to keep.
+ * Score a player-selected subset of dice.
  * Validates that ALL selected dice participate in scoring combinations.
- * Returns { total: 0, components: [], scoringDiceIndices: [] } if invalid.
+ * If any die is "dead weight", returns total: 0 (invalid selection).
  */
 export function scoreDice(selectedDice: Roll): ScoreBreakdown {
   if (selectedDice.length === 0) {
@@ -187,7 +173,7 @@ export function scoreDice(selectedDice: Roll): ScoreBreakdown {
 
   const result = scoreRoll(selectedDice);
 
-  // Validate that ALL selected dice participate in scoring
+  // Validate all dice participate in scoring
   if (result.scoringDiceIndices.length !== selectedDice.length) {
     return { total: 0, components: [], scoringDiceIndices: [] };
   }
@@ -196,7 +182,7 @@ export function scoreDice(selectedDice: Roll): ScoreBreakdown {
 }
 
 /**
- * Find the best possible score from a roll.
+ * Return the best possible score for a roll.
  * scoreRoll already returns the optimal score due to priority ordering.
  */
 export function bestPossibleScore(dice: Roll): ScoreBreakdown {
