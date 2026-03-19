@@ -19,13 +19,13 @@ Requirements for initial release. Validates the core differentiator: 3D dice on 
 
 ### Turn Mechanics
 
-- [ ] **TURN-01**: Player can roll all 6 dice at the start of a turn
-- [ ] **TURN-02**: Player must set aside at least one scoring die after each roll
-- [ ] **TURN-03**: Player can choose to bank accumulated turn points and end their turn
-- [ ] **TURN-04**: Farkle: if no scoring dice are rolled, player loses all accumulated turn points
-- [ ] **TURN-05**: Hot dice: if all 6 dice are set aside as scoring, player must roll all 6 again (adding to accumulated points)
-- [ ] **TURN-06**: Player must earn 800 points (default threshold) in a single turn to "get on the board"
-- [ ] **TURN-07**: After getting on the board, player can bank any amount on subsequent turns
+- [x] **TURN-01**: Player can roll all 6 dice at the start of a turn
+- [x] **TURN-02**: Player must set aside at least one scoring die after each roll
+- [x] **TURN-03**: Player can choose to bank accumulated turn points and end their turn
+- [x] **TURN-04**: Farkle: if no scoring dice are rolled, player loses all accumulated turn points
+- [x] **TURN-05**: Hot dice: if all 6 dice are set aside as scoring, player must roll all 6 again (adding to accumulated points)
+- [x] **TURN-06**: Player must earn 800 points (default threshold) in a single turn to "get on the board"
+- [x] **TURN-07**: After getting on the board, player can bank any amount on subsequent turns
 
 ### Game Flow
 
@@ -112,13 +112,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SCORE-05 | Phase 1 | Complete |
 | SCORE-06 | Phase 1 | Complete |
 | SCORE-07 | Phase 1 | Complete |
-| TURN-01 | Phase 1 | Pending |
-| TURN-02 | Phase 1 | Pending |
-| TURN-03 | Phase 1 | Pending |
-| TURN-04 | Phase 1 | Pending |
-| TURN-05 | Phase 1 | Pending |
-| TURN-06 | Phase 1 | Pending |
-| TURN-07 | Phase 1 | Pending |
+| TURN-01 | Phase 1 | Complete |
+| TURN-02 | Phase 1 | Complete |
+| TURN-03 | Phase 1 | Complete |
+| TURN-04 | Phase 1 | Complete |
+| TURN-05 | Phase 1 | Complete |
+| TURN-06 | Phase 1 | Complete |
+| TURN-07 | Phase 1 | Complete |
 | GAME-01 | Phase 3 | Pending |
 | GAME-02 | Phase 3 | Pending |
 | GAME-03 | Phase 3 | Pending |
