@@ -182,8 +182,8 @@ describe('findScoringDice (SCORE-07)', () => {
     expect(result).toEqual([0]);
   });
 
-  it('returns [0, 1] for [1,5,3,4,2,6] (1 and 5 score)', () => {
-    const result = findScoringDice([1, 5, 3, 4, 2, 6]);
+  it('returns [0, 1] for [1,5,3,4,2,2] (1 and 5 score)', () => {
+    const result = findScoringDice([1, 5, 3, 4, 2, 2]);
     expect(result).toEqual([0, 1]);
   });
 
