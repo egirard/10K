@@ -47,7 +47,7 @@ describe('roll (TURN-01)', () => {
     expect(selected.valid).toBe(true);
     expect(selected.state.availableDice).toBe(4);
 
-    const rerolled = roll(selected.state, { diceValues: [2, 3, 4, 6] as Roll });
+    const rerolled = roll(selected.state, { diceValues: [1, 3, 4, 6] as Roll });
     expect(rerolled.valid).toBe(true);
     expect(rerolled.state.phase).toBe('ROLLED');
     expect(rerolled.state.currentRoll.length).toBe(4);
