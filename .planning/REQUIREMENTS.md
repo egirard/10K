@@ -105,48 +105,48 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCORE-01 | — | Pending |
-| SCORE-02 | — | Pending |
-| SCORE-03 | — | Pending |
-| SCORE-04 | — | Pending |
-| SCORE-05 | — | Pending |
-| SCORE-06 | — | Pending |
-| SCORE-07 | — | Pending |
-| TURN-01 | — | Pending |
-| TURN-02 | — | Pending |
-| TURN-03 | — | Pending |
-| TURN-04 | — | Pending |
-| TURN-05 | — | Pending |
-| TURN-06 | — | Pending |
-| TURN-07 | — | Pending |
-| GAME-01 | — | Pending |
-| GAME-02 | — | Pending |
-| GAME-03 | — | Pending |
-| GAME-04 | — | Pending |
-| GAME-05 | — | Pending |
-| GAME-06 | — | Pending |
-| DICE-01 | — | Pending |
-| DICE-02 | — | Pending |
-| DICE-03 | — | Pending |
-| DICE-04 | — | Pending |
-| DICE-05 | — | Pending |
-| DICE-06 | — | Pending |
-| AUDIO-01 | — | Pending |
-| AUDIO-02 | — | Pending |
-| AUDIO-03 | — | Pending |
-| UI-01 | — | Pending |
-| UI-02 | — | Pending |
-| UI-03 | — | Pending |
-| UI-04 | — | Pending |
-| UI-05 | — | Pending |
-| UI-06 | — | Pending |
-| UI-07 | — | Pending |
+| SCORE-01 | Phase 1 | Pending |
+| SCORE-02 | Phase 1 | Pending |
+| SCORE-03 | Phase 1 | Pending |
+| SCORE-04 | Phase 1 | Pending |
+| SCORE-05 | Phase 1 | Pending |
+| SCORE-06 | Phase 1 | Pending |
+| SCORE-07 | Phase 1 | Pending |
+| TURN-01 | Phase 1 | Pending |
+| TURN-02 | Phase 1 | Pending |
+| TURN-03 | Phase 1 | Pending |
+| TURN-04 | Phase 1 | Pending |
+| TURN-05 | Phase 1 | Pending |
+| TURN-06 | Phase 1 | Pending |
+| TURN-07 | Phase 1 | Pending |
+| GAME-01 | Phase 3 | Pending |
+| GAME-02 | Phase 3 | Pending |
+| GAME-03 | Phase 3 | Pending |
+| GAME-04 | Phase 3 | Pending |
+| GAME-05 | Phase 3 | Pending |
+| GAME-06 | Phase 3 | Pending |
+| DICE-01 | Phase 2 | Pending |
+| DICE-02 | Phase 2 | Pending |
+| DICE-03 | Phase 2 | Pending |
+| DICE-04 | Phase 2 | Pending |
+| DICE-05 | Phase 2 | Pending |
+| DICE-06 | Phase 2 | Pending |
+| AUDIO-01 | Phase 3 | Pending |
+| AUDIO-02 | Phase 3 | Pending |
+| AUDIO-03 | Phase 3 | Pending |
+| UI-01 | Phase 3 | Pending |
+| UI-02 | Phase 3 | Pending |
+| UI-03 | Phase 3 | Pending |
+| UI-04 | Phase 3 | Pending |
+| UI-05 | Phase 3 | Pending |
+| UI-06 | Phase 3 | Pending |
+| UI-07 | Phase 3 | Pending |
 
 **Coverage:**
 - v1 requirements: 36 total
-- Mapped to phases: 0
-- Unmapped: 36 ⚠️
+- Mapped to phases: 36
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-19*
-*Last updated: 2026-03-19 after initial definition*
+*Last updated: 2026-03-19 after roadmap creation*
