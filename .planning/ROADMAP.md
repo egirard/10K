@@ -12,7 +12,7 @@ This roadmap delivers a solo practice mode of Ten Thousand with 3D physics dice 
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Scoring Engine** - Pure TypeScript implementation of all Ten Thousand scoring rules and turn mechanics, fully unit-tested
+- [x] **Phase 1: Scoring Engine** - Pure TypeScript implementation of all Ten Thousand scoring rules and turn mechanics, fully unit-tested (completed 2026-03-19)
 - [ ] **Phase 2: 3D Dice and Game Table** - Physics-based 3D dice rolling on a felt/wood game table with face detection, optimized for mobile
 - [ ] **Phase 3: Playable Game** - Wire engine to dice via stores, add HUD overlay, audio, game flow, and mobile-responsive polish
 
@@ -28,7 +28,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Hot dice are detected when all 6 dice are set aside as scoring
   4. Farkle is detected when no scoring dice exist in a roll
   5. Turn state machine correctly enforces the flow: roll, select scoring dice, bank-or-roll-again, with 800-point entry threshold
-**Plans:** 3 plans
+**Plans:** 3/3 plans complete
 
 Plans:
 - [ ] 01-01-PLAN.md — Initialize project (TypeScript + Vitest) and define shared types and constants
@@ -74,6 +74,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Scoring Engine | 0/3 | Planning complete | - |
+| 1. Scoring Engine | 0/3 | Complete    | 2026-03-19 |
 | 2. 3D Dice and Game Table | 0/? | Not started | - |
 | 3. Playable Game | 0/? | Not started | - |
