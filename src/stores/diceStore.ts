@@ -14,6 +14,8 @@ interface DiceStore {
   phase: DicePhase;
   dice: DieState[];
   rollCount: number;
+  /** Ordered list of selected die indices (for slot assignment) */
+  selectionOrder: number[];
 
   // Actions
   startRoll: () => void;
@@ -35,10 +37,12 @@ export const useDiceStore = create<DiceStore>((set) => ({
   phase: 'idle',
   dice: createInitialDice(),
   rollCount: 0,
+  selectionOrder: [],
 
   startRoll: () => set((s) => ({
     phase: 'rolling',
     rollCount: s.rollCount + 1,
+    selectionOrder: [],
     dice: s.dice.map((d) => ({ ...d, value: null, selected: false, canScore: false })),
   })),
 
@@ -48,10 +52,12 @@ export const useDiceStore = create<DiceStore>((set) => ({
   })),
 
   selectDie: (index) => set((s) => ({
+    selectionOrder: [...s.selectionOrder, index],
     dice: s.dice.map((d, i) => i === index ? { ...d, selected: true } : d),
   })),
 
   deselectDie: (index) => set((s) => ({
+    selectionOrder: s.selectionOrder.filter((i) => i !== index),
     dice: s.dice.map((d, i) => i === index ? { ...d, selected: false } : d),
   })),
 
@@ -63,5 +69,6 @@ export const useDiceStore = create<DiceStore>((set) => ({
     phase: 'idle',
     dice: createInitialDice(),
     rollCount: 0,
+    selectionOrder: [],
   }),
 }));
