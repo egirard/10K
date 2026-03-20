@@ -2,8 +2,11 @@
   "name": "10k",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "test": "vitest run --reporter=verbose",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -20,8 +23,22 @@
     "url": "https://github.com/egirard/10K/issues"
   },
   "homepage": "https://github.com/egirard/10K#readme",
+  "dependencies": {
+    "react": "^19",
+    "react-dom": "^19",
+    "three": "^0.183",
+    "@react-three/fiber": "^9.5",
+    "@react-three/drei": "^10.7",
+    "@react-three/rapier": "^2.2",
+    "zustand": "^5.0"
+  },
   "devDependencies": {
+    "@vitejs/plugin-react": "^6",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.183",
     "typescript": "^5.9.3",
+    "vite": "^8",
     "vitest": "^3.2.4"
   }
 }
