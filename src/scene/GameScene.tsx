@@ -1,13 +1,20 @@
 import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/rapier';
+import { AdaptiveDpr, Stats } from '@react-three/drei';
 import { GameTable } from './GameTable';
 import { Camera } from './Camera';
 import { DiceGroup } from './DiceGroup';
+
+// Toggle dev stats via URL param: ?stats=true
+const SHOW_STATS =
+  typeof window !== 'undefined' &&
+  new URLSearchParams(window.location.search).has('stats');
 
 export function GameScene() {
   return (
     <Canvas shadows>
       <Camera />
+      <AdaptiveDpr pixelated />
       <ambientLight intensity={0.4} color="#fff5e6" />
       <directionalLight
         position={[2, 10, 3]}
@@ -21,6 +28,7 @@ export function GameScene() {
         <GameTable />
         <DiceGroup />
       </Physics>
+      {SHOW_STATS && <Stats />}
     </Canvas>
   );
 }

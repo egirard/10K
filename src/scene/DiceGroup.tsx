@@ -27,6 +27,49 @@ function rand(min: number, max: number): number {
   return Math.random() * (max - min) + min;
 }
 
+/** Launch a single die with randomized impulse and torque */
+function launchDie(body: RapierRigidBody): void {
+  // Reset position to a random point above the table
+  body.setTranslation(
+    { x: rand(-2, 2), y: rand(4, 6), z: rand(-2, 2) },
+    true,
+  );
+
+  // Random initial rotation (normalized quaternion via Euler)
+  const q = new THREE.Quaternion().setFromEuler(
+    new THREE.Euler(rand(0, Math.PI * 2), rand(0, Math.PI * 2), rand(0, Math.PI * 2)),
+  );
+  body.setRotation({ x: q.x, y: q.y, z: q.z, w: q.w }, true);
+
+  // Reset velocities
+  body.setLinvel({ x: 0, y: 0, z: 0 }, true);
+  body.setAngvel({ x: 0, y: 0, z: 0 }, true);
+
+  // Varied impulse magnitude per die (base * 0.8-1.2) for natural spread
+  const impulseScale = rand(0.8, 1.2);
+  body.applyImpulse(
+    {
+      x: rand(-3, 3) * impulseScale,
+      y: rand(-2, -1) * impulseScale,
+      z: rand(-3, 3) * impulseScale,
+    },
+    true,
+  );
+
+  // Apply random torque for tumbling (also varied)
+  const torqueScale = rand(0.8, 1.2);
+  body.applyTorqueImpulse(
+    {
+      x: rand(-15, 15) * torqueScale,
+      y: rand(-15, 15) * torqueScale,
+      z: rand(-15, 15) * torqueScale,
+    },
+    true,
+  );
+
+  body.wakeUp();
+}
+
 export function DiceGroup() {
   // Store refs to all 6 RigidBody instances
   const bodyRefs = useRef<(RapierRigidBody | null)[]>(
@@ -43,39 +86,19 @@ export function DiceGroup() {
 
     useDiceStore.getState().startRoll();
 
+    // Stagger die releases: tiny random delay (0-100ms) per die
+    // to simulate dice leaving the hand at slightly different times
     for (let i = 0; i < DICE_COUNT; i++) {
       const body = bodyRefs.current[i];
       if (!body) continue;
 
-      // Reset position to a random point above the table
-      body.setTranslation(
-        { x: rand(-2, 2), y: rand(4, 6), z: rand(-2, 2) },
-        true,
-      );
-
-      // Random initial rotation (normalized quaternion)
-      const q = new THREE.Quaternion().setFromEuler(
-        new THREE.Euler(rand(0, Math.PI * 2), rand(0, Math.PI * 2), rand(0, Math.PI * 2)),
-      );
-      body.setRotation({ x: q.x, y: q.y, z: q.z, w: q.w }, true);
-
-      // Reset velocities
-      body.setLinvel({ x: 0, y: 0, z: 0 }, true);
-      body.setAngvel({ x: 0, y: 0, z: 0 }, true);
-
-      // Apply random impulse: lateral spread + downward
-      body.applyImpulse(
-        { x: rand(-3, 3), y: rand(-2, -1), z: rand(-3, 3) },
-        true,
-      );
-
-      // Apply random torque for tumbling
-      body.applyTorqueImpulse(
-        { x: rand(-15, 15), y: rand(-15, 15), z: rand(-15, 15) },
-        true,
-      );
-
-      body.wakeUp();
+      const delay = rand(0, 100);
+      if (delay < 5) {
+        // Near-zero delay: launch immediately
+        launchDie(body);
+      } else {
+        setTimeout(() => launchDie(body), delay);
+      }
     }
 
     // Reset debounce counter
