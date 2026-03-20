@@ -42,7 +42,7 @@ Requirements for initial release. Validates the core differentiator: 3D dice on 
 - [x] **DICE-02**: Dice landing faces are correctly read from physics state after roll settles
 - [x] **DICE-03**: Game table has felt surface with wood textures (game table aesthetic)
 - [ ] **DICE-04**: Player can tap/click individual dice to select them as scoring dice (clear visual feedback)
-- [ ] **DICE-05**: Dice roll includes suspense elements (camera work, anticipation on final bounces)
+- [x] **DICE-05**: Dice roll includes suspense elements (camera work, anticipation on final bounces)
 - [x] **DICE-06**: 3D dice and physics run smoothly on mobile devices
 
 ### Audio
@@ -129,7 +129,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DICE-02 | Phase 2 | Complete |
 | DICE-03 | Phase 2 | Complete |
 | DICE-04 | Phase 2 | Pending |
-| DICE-05 | Phase 2 | Pending |
+| DICE-05 | Phase 2 | Complete |
 | DICE-06 | Phase 2 | Complete |
 | AUDIO-01 | Phase 3 | Pending |
 | AUDIO-02 | Phase 3 | Pending |

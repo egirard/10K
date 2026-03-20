@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: unknown
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-03-20T02:36:46.611Z"
+stopped_at: Completed 02-03-PLAN.md
+last_updated: "2026-03-20T02:41:30Z"
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 7
-  completed_plans: 5
+  completed_plans: 6
 ---
 
 # Project State
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-03-19)
 ## Current Position
 
 Phase: 02 (3d-dice-and-game-table) — EXECUTING
-Plan: 3 of 4
+Plan: 4 of 4
 
 ## Performance Metrics
 
@@ -51,6 +51,7 @@ Plan: 3 of 4
 | Phase 01-03 P03 | 5min | 2 tasks | 4 files |
 | Phase 02 P01 | 3min | 2 tasks | 10 files |
 | Phase 02-02 P02 | 4min | 2 tasks | 5 files |
+| Phase 02-03 P03 | 4min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -71,6 +72,10 @@ Recent decisions affecting current work:
 - [Phase 02-02]: Face normal mapping: +Y=2, -Y=5, +Z=1, -Z=6, +X=3, -X=4 (Western standard)
 - [Phase 02-02]: Face detection uses quaternion dot-product against 6 face normals -- numerically robust, avoids gimbal lock
 - [Phase 02-02]: Face normal mapping: +Y=2, -Y=5, +Z=1, -Z=6, +X=3, -X=4 (Western standard)
+- [Phase 02-03]: Staggered die release (0-100ms random delay) for natural hand-roll feel
+- [Phase 02-03]: 10-frame debounce on isSleeping before reading face values to prevent premature reads
+- [Phase 02-03]: Gravity -30 (3x Earth) for snappier feel on small table scale
+- [Phase 02-03]: AdaptiveDpr for mobile performance; Stats toggle via ?stats=true URL param
 
 ### Pending Todos
 
@@ -83,6 +88,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-20T02:36:39.850Z
-Stopped at: Completed 02-02-PLAN.md
+Last session: 2026-03-20T02:41:30Z
+Stopped at: Completed 02-03-PLAN.md
 Resume file: None
