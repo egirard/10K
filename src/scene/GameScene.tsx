@@ -2,6 +2,7 @@ import { Canvas } from '@react-three/fiber';
 import { Physics } from '@react-three/rapier';
 import { GameTable } from './GameTable';
 import { Camera } from './Camera';
+import { DiceGroup } from './DiceGroup';
 
 export function GameScene() {
   return (
@@ -18,6 +19,7 @@ export function GameScene() {
       />
       <Physics gravity={[0, -9.81, 0]}>
         <GameTable />
+        <DiceGroup />
       </Physics>
     </Canvas>
   );
