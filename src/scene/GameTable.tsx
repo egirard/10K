@@ -17,7 +17,7 @@ export function GameTable() {
   return (
     <group>
       {/* Felt surface */}
-      <RigidBody type="fixed" position={[0, -FELT_THICKNESS / 2, 0]}>
+      <RigidBody type="fixed" position={[0, -FELT_THICKNESS / 2, 0]} restitution={0.15} friction={0.8}>
         <CuboidCollider args={[halfW, FELT_THICKNESS / 2, halfD]} />
         <mesh receiveShadow>
           <boxGeometry args={[FELT_WIDTH, FELT_THICKNESS, FELT_DEPTH]} />
@@ -33,6 +33,8 @@ export function GameTable() {
       <RigidBody
         type="fixed"
         position={[0, RIM_HEIGHT / 2, halfD + RIM_THICKNESS / 2]}
+        restitution={0.5}
+        friction={0.4}
       >
         <CuboidCollider
           args={[
@@ -61,6 +63,8 @@ export function GameTable() {
       <RigidBody
         type="fixed"
         position={[0, RIM_HEIGHT / 2, -(halfD + RIM_THICKNESS / 2)]}
+        restitution={0.5}
+        friction={0.4}
       >
         <CuboidCollider
           args={[
@@ -89,6 +93,8 @@ export function GameTable() {
       <RigidBody
         type="fixed"
         position={[-(halfW + RIM_THICKNESS / 2), RIM_HEIGHT / 2, 0]}
+        restitution={0.5}
+        friction={0.4}
       >
         <CuboidCollider
           args={[RIM_THICKNESS / 2, RIM_HEIGHT / 2, halfD]}
@@ -107,6 +113,8 @@ export function GameTable() {
       <RigidBody
         type="fixed"
         position={[halfW + RIM_THICKNESS / 2, RIM_HEIGHT / 2, 0]}
+        restitution={0.5}
+        friction={0.4}
       >
         <CuboidCollider
           args={[RIM_THICKNESS / 2, RIM_HEIGHT / 2, halfD]}

@@ -17,7 +17,7 @@ export function GameScene() {
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
       />
-      <Physics gravity={[0, -9.81, 0]}>
+      <Physics gravity={[0, -30, 0]} timeStep={1 / 60}>
         <GameTable />
         <DiceGroup />
       </Physics>

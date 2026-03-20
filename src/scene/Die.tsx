@@ -1,6 +1,8 @@
 import { forwardRef, useMemo, type ReactElement } from 'react';
 import * as THREE from 'three';
 import { RoundedBox } from '@react-three/drei';
+import { RigidBody, CuboidCollider } from '@react-three/rapier';
+import type { RapierRigidBody } from '@react-three/rapier';
 
 // --- Shared geometry & materials (created once, reused across all dice per Pitfall 9) ---
 
@@ -50,7 +52,7 @@ export interface DieProps {
   position: [number, number, number];
 }
 
-export const Die = forwardRef<THREE.Group, DieProps>(function Die({ position }, ref) {
+export const Die = forwardRef<RapierRigidBody, DieProps>(function Die({ position }, ref) {
   // Shared materials - created once via useMemo (Pitfall 9: avoid per-frame allocation)
   const { pipGeom, blackMat, redMat } = useMemo(() => {
     const geom = new THREE.CylinderGeometry(PIP_RADIUS, PIP_RADIUS, PIP_DEPTH, PIP_SEGMENTS);
@@ -102,7 +104,17 @@ export const Die = forwardRef<THREE.Group, DieProps>(function Die({ position }, 
   }, [pipGeom, blackMat, redMat]);
 
   return (
-    <group ref={ref} position={position}>
+    <RigidBody
+      ref={ref}
+      type="dynamic"
+      colliders={false}
+      position={position}
+      restitution={0.35}
+      friction={0.6}
+      angularDamping={0.4}
+      linearDamping={0.2}
+    >
+      <CuboidCollider args={[HALF, HALF, HALF]} />
       <RoundedBox
         args={[DIE_SIZE, DIE_SIZE, DIE_SIZE]}
         radius={0.08}
@@ -113,6 +125,6 @@ export const Die = forwardRef<THREE.Group, DieProps>(function Die({ position }, 
         <meshStandardMaterial color="#f5f5f0" roughness={0.3} metalness={0.05} />
       </RoundedBox>
       {pips}
-    </group>
+    </RigidBody>
   );
 });
