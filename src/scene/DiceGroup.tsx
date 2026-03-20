@@ -35,9 +35,9 @@ export function getSelectedPosition(slotIndex: number): [number, number, number]
 
 /** Launch a single die with randomized impulse and torque */
 function launchDie(body: RapierRigidBody): void {
-  // Reset position to a random point above the table
+  // Reset position to a random point above the table center
   body.setTranslation(
-    { x: rand(-2, 2), y: rand(4, 6), z: rand(-2, 2) },
+    { x: rand(-1, 1), y: rand(3, 5), z: rand(-1, 1) },
     true,
   );
 
@@ -55,9 +55,9 @@ function launchDie(body: RapierRigidBody): void {
   const impulseScale = rand(0.8, 1.2);
   body.applyImpulse(
     {
-      x: rand(-3, 3) * impulseScale,
-      y: rand(-2, -1) * impulseScale,
-      z: rand(-3, 3) * impulseScale,
+      x: rand(-1.5, 1.5) * impulseScale,
+      y: rand(-1, 0) * impulseScale,
+      z: rand(-1.5, 1.5) * impulseScale,
     },
     true,
   );

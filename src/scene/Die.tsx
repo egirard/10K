@@ -292,6 +292,8 @@ export const Die = forwardRef<RapierRigidBody, DieProps>(function Die({ index, p
       linearDamping={0.2}
     >
       <CuboidCollider args={[HALF, HALF, HALF]} />
+      {/* Invisible spike above die to prevent stacking */}
+      <CuboidCollider args={[0.08, HALF * 0.5, 0.08]} position={[0, HALF + HALF * 0.5, 0]} />
       <RoundedBox
         ref={meshRef}
         args={[DIE_SIZE, DIE_SIZE, DIE_SIZE]}
