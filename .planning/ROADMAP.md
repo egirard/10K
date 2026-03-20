@@ -31,9 +31,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 3/3 plans complete
 
 Plans:
-- [ ] 01-01-PLAN.md — Initialize project (TypeScript + Vitest) and define shared types and constants
-- [ ] 01-02-PLAN.md — TDD scoring engine (singles, triples, N-of-a-kind, straight, three pairs, findScoringDice)
-- [ ] 01-03-PLAN.md — TDD turn state machine (roll, select, bank, farkle, hot dice, threshold)
+- [x] 01-01-PLAN.md — Initialize project (TypeScript + Vitest) and define shared types and constants
+- [x] 01-02-PLAN.md — TDD scoring engine (singles, triples, N-of-a-kind, straight, three pairs, findScoringDice)
+- [x] 01-03-PLAN.md — TDD turn state machine (roll, select, bank, farkle, hot dice, threshold)
 
 ### Phase 2: 3D Dice and Game Table
 **Goal**: Six 3D dice roll with satisfying physics on a game table with felt and wood textures, and dice face values are correctly read after settling
@@ -45,11 +45,13 @@ Plans:
   3. The game table has a felt surface with wood textures that conveys a physical game table aesthetic
   4. Dice roll animation runs smoothly on mobile devices without frame drops or jank
   5. Player can tap/click individual dice to select them, with clear visual feedback distinguishing selected from unselected
-**Plans**: TBD
+**Plans:** 4 plans
 
 Plans:
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
+- [ ] 02-01-PLAN.md — Initialize Vite + React + R3F + Rapier stack and build game table scene (felt, wood rim, lighting, camera)
+- [ ] 02-02-PLAN.md — Create 3D dice meshes (white, black pips, red 1-pip, rounded edges) and implement quaternion face detection with tests
+- [ ] 02-03-PLAN.md — Add physics-based rolling with Rapier, settle detection, face value readout, and dice store
+- [ ] 02-04-PLAN.md — Implement tap-to-select UX with slide animation, dimming, shake/reject, and human verification
 
 ### Phase 3: Playable Game
 **Goal**: A complete, playable solo practice game of Ten Thousand running in the browser with HUD, audio feedback, and mobile-responsive layout
@@ -74,6 +76,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Scoring Engine | 0/3 | Complete    | 2026-03-19 |
-| 2. 3D Dice and Game Table | 0/? | Not started | - |
+| 1. Scoring Engine | 3/3 | Complete    | 2026-03-19 |
+| 2. 3D Dice and Game Table | 0/4 | Not started | - |
 | 3. Playable Game | 0/? | Not started | - |
