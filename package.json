@@ -33,12 +33,12 @@
     "zustand": "^5.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-react": "^6",
+    "@vitejs/plugin-react": "^4",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/three": "^0.183",
     "typescript": "^5.9.3",
-    "vite": "^8",
+    "vite": "^6",
     "vitest": "^3.2.4"
   }
 }
